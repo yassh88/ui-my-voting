@@ -1,4 +1,5 @@
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { MoralisProvider } from "react-moralis";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -6,27 +7,29 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
-`
+`;
 
 interface ThemeInterface {
   colors: {
-    primary: string
-  }
+    primary: string;
+  };
 }
 
 const theme: ThemeInterface = {
   colors: {
-    primary: '#0070f3',
+    primary: "#0070f3",
   },
-}
+};
 
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <MoralisProvider initializeOnMount={false}>
+        <GlobalStyle />
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </MoralisProvider>
     </>
-  )
+  );
 }
